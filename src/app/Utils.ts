@@ -12,7 +12,7 @@ export class Utils {
         return parse(url, true);
     }
 
-
+    /* istanbul ignore next */
     public static toUpperCase(arg: string): string {
         return arg.toUpperCase();
     }
