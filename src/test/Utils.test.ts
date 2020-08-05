@@ -3,11 +3,18 @@ import { Utils } from '../app/Utils'
 
 describe('Utils test suite', () => {
 
+    beforeEach(() => {
+        console.log('before each');
+    })
+
+    beforeAll(() => {
+        console.log('before all');
+    })
+
     test('first test', () => {
         const result = Utils.toUpperCase('abc');
         expect(result).toBe('ABC');
     });
-
     test('parse simple URL', () => {
         const parsedUrl = Utils.parseUrl('http://localhost:8080/login');
         expect(parsedUrl.href).toBe('http://localhost:8080/login');
@@ -25,4 +32,6 @@ describe('Utils test suite', () => {
         expect(parsedUrl.query).toEqual(expectedQuery);
         expect(expectedQuery).toBe(expectedQuery);
     })
+
+    test.todo('test invalid URL')
 });
