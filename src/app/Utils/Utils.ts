@@ -13,7 +13,6 @@ export class Utils {
         return parse(url, true);
     }
 
-    // Dummy object test example
     public static getRequestBasePath(req: IncomingMessage): string {
         const url = req.url;
         if (url) {
