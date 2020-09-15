@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "itest": "jest --config jest.config.itest.js",
     "start": "ts-node src/app/Launcher.ts"
   },
   "repository": {
