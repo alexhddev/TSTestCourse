@@ -48,7 +48,7 @@ describe('UserCredentialsDbAccess test suite', () => {
         nedbMock.find.mockImplementationOnce(bar);
         const getUserCredentialsResult = await userCredentialsDBAccess.getUserCredential('someUserName', 'somePassword');
         expect(getUserCredentialsResult).toBe(someUserCredentials);
-        expect(nedbMock.find).toBeCalledWith({ userName: 'someUserName', password: 'somePassword' }, expect.any(Function));
+        expect(nedbMock.find).toBeCalledWith({ username: 'someUserName', password: 'somePassword' }, expect.any(Function));
     });
 
     test('getUserCredentials with no result and no error', async () => {
@@ -58,7 +58,7 @@ describe('UserCredentialsDbAccess test suite', () => {
         nedbMock.find.mockImplementationOnce(bar);
         const getUserCredentialsResult = await userCredentialsDBAccess.getUserCredential('someUserName', 'somePassword');
         expect(getUserCredentialsResult).toBeNull;
-        expect(nedbMock.find).toBeCalledWith({ userName: 'someUserName', password: 'somePassword' }, expect.any(Function));
+        expect(nedbMock.find).toBeCalledWith({ username: 'someUserName', password: 'somePassword' }, expect.any(Function));
     });
 
     test('getUserCredentials with error', async () => {
@@ -67,7 +67,7 @@ describe('UserCredentialsDbAccess test suite', () => {
         }
         nedbMock.find.mockImplementationOnce(bar);
         await expect(userCredentialsDBAccess.getUserCredential('someUserName', 'somePassword')).rejects.toThrow('something went wrong');
-        expect(nedbMock.find).toBeCalledWith({ userName: 'someUserName', password: 'somePassword' }, expect.any(Function));
+        expect(nedbMock.find).toBeCalledWith({ username: 'someUserName', password: 'somePassword' }, expect.any(Function));
     });
     test('constructor argument', () => {
         new UserCredentialsDbAccess();

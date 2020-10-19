@@ -12,7 +12,8 @@ const requestMock = {
     url: ''
 };
 const responseMock = {
-    end: jest.fn()
+    end: jest.fn(),
+    setHeader: jest.fn()
 };
 const listenMock = {
     listen: jest.fn()
