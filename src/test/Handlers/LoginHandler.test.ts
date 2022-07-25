@@ -1,5 +1,6 @@
 import { LoginHandler } from '../../app/Handlers/LoginHandler';
 import { HTTP_CODES, HTTP_METHODS } from '../../app/Models/ServerModels';
+import { Utils } from '../../app/Utils/Utils';
 
 describe('LoginHandler test suite', ()=>{
     let loginHandler: LoginHandler;
@@ -11,6 +12,7 @@ describe('LoginHandler test suite', ()=>{
         writeHead: jest.fn()
     };
     const authorizerMock = {};
+    const getRequestBodyMock = jest.fn()
 
     beforeEach(()=>{
         loginHandler = new LoginHandler(
@@ -18,6 +20,7 @@ describe('LoginHandler test suite', ()=>{
             responseMock as any,
             authorizerMock as any
         )
+        Utils.getRequestBody = getRequestBodyMock;
     });
 
     afterEach(()=>{
@@ -34,5 +37,15 @@ describe('LoginHandler test suite', ()=>{
         requestMock.method = 'someRandomMethod';
         await loginHandler.handleRequest();
         expect(responseMock.writeHead).not.toHaveBeenCalled();
+    })
+
+    test.only('post test with valid login', async ()=>{
+        getRequestBodyMock.mockReturnValueOnce({
+            username: 'someUser',
+            password: 'password'
+
+        });
+        await loginHandler.handleRequest()
+
     })
 })
