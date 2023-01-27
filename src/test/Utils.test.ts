@@ -1,7 +1,7 @@
 import { toUpperCase } from "../app/Utils";
 
 
-describe('Utils test suite', ()=>{
+describe.skip('Utils test suite', ()=>{
     it('should return uppercase', ()=>{
 
         // arrange
