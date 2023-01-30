@@ -8,12 +8,38 @@ export type checkResult = {
 export class PasswordStrengthChecker {
 
     public checkPassword(password: string): checkResult {
-        let valid = false
+        try {
+            return {
+                valid: this.isLongEnough(password) &&
+                        this.hasLowerCase(password) &&
+                        this.hasUpperCase(password)
+            }
+        } catch (error) {
+            return {
+                valid: false,
+                errorMessage: error.message
+            }
+        }
+    }
+
+    private isLongEnough(password: string){
         if (password.length > 8) {
-            valid = true;
-        }
-        return {
-            valid: valid
-        }
+            return true;
+        };
+        throw new Error("Password must be at least 8 chars long!");    
+    }
+
+    private hasUpperCase(password: string){
+        if (password != password.toLowerCase()) {
+            return true;
+        };
+        throw new Error("Password must have an uppercase letter!");          
+    }
+
+    private hasLowerCase(password: string){
+        if (password != password.toUpperCase()) {
+            return true;
+        };
+        throw new Error("Password must have a lowercase letter!");        
     }
 }

@@ -26,9 +26,34 @@ describe('PasswordStrengthChecker test suite', ()=>{
 
         it('password with less than 8 chars is invalid', ()=>{
             const expected:checkResult = {
-                valid: false
+                valid: false,
+                errorMessage: 'Password must be at least 8 chars long!'
             }
             const input = 'myPass';
+
+            const actual = sut.checkPassword(input);
+
+            expect(actual).toEqual(expected);
+        });
+
+        it('password with no upper case is invalid', ()=>{
+            const expected:checkResult = {
+                valid: false,
+                errorMessage: 'Password must have an uppercase letter!'
+            }
+            const input = 'some_password';
+
+            const actual = sut.checkPassword(input);
+
+            expect(actual).toEqual(expected);
+        });
+
+        it('password with no lower case is invalid', ()=>{
+            const expected:checkResult = {
+                valid: false,
+                errorMessage: 'Password must have a lowercase letter!'
+            }
+            const input = 'SOME_PASSWORD';
 
             const actual = sut.checkPassword(input);
 
