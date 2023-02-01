@@ -37,6 +37,7 @@ describe('Utils test suite', () => {
             } catch (error) {
                 expect(error).toBeInstanceOf(Error);
                 expect(error).toHaveProperty('message', 'Invalid argument!');
+                done();
             }
 
         })
