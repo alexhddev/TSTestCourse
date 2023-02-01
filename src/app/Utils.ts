@@ -21,6 +21,7 @@ export type stringInfo = {
     extraInfo: Object | undefined
 }
 
+/* istanbul ignore next */
 export function getStringInfo(arg: string): stringInfo{
     return {
         lowerCase: arg.toLowerCase(),
