@@ -35,10 +35,11 @@ describe('Utils test suite', () => {
         it.only('Should throw error on invalid argument - try catch block', (done)=>{
             try {
                 sut.getStringInfo('');
-                done('GetString info for invalid argument should throw error!')
+                done('GetString info for invalid argument should throw error!  ')
             } catch (error) {
                 expect(error).toBeInstanceOf(Error);
                 expect(error).toHaveProperty('message', 'Invalid argument!');
+                done();
             }
         })
 

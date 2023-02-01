@@ -7,7 +7,7 @@ export type checkResult = {
 
 export class PasswordStrengthChecker {
 
-    public checkPassword(password: string): checkResult {
+    public checkPassword(password: string): checkResult  {
         try {
             return {
                 valid: this.isLongEnough(password) &&
