@@ -21,3 +21,12 @@ export function getStringInfo(arg:string):stringInfo {
         extraInfo: {}
     }
 }
+
+export class StringUtils {
+    public getStringInfo(arg:string):stringInfo {
+        // if(!arg) {
+        //     throw new Error('Invalid argument!');            
+        // }
+        return getStringInfo(arg);
+    }
+}
