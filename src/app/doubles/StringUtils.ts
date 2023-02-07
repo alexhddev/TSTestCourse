@@ -1,3 +1,5 @@
+import { v4 } from 'uuid';
+
 export type stringInfo = {
     lowerCase: string,
     upperCase: string,
@@ -24,6 +26,20 @@ export function toUpperCaseWithCb(arg: string, callback: LoggerServiceCallBack):
     callback(`called function with ${arg}`)
     return arg.toLocaleUpperCase();
 }
+
+export function toUpperCase(arg:string){
+    return arg.toUpperCase();
+}
+
+export function toLowerCase(arg:string){
+    return arg.toLowerCase();
+}
+
+export function toLowerCaseWithId(arg:string){
+    return arg.toLowerCase() + v4();
+}
+
+
 
 export class StringUtils {
 
