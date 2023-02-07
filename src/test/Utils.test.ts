@@ -1,7 +1,23 @@
-import { getStringInfo, stringInfo, StringUtils, toUpperCase } from "../app/Utils";
+import { calculateComplexity, getStringInfo, stringInfo, StringUtils, toUpperCase } from "../app/Utils";
 
 
 describe('Utils test suite', () => {
+
+    it('should calculate complexity', ()=>{
+        const someStringInfo = {
+            length: 5,
+            extraInfo:{
+                info1: 'someInfo',
+                info2: 'someOtherInfo'
+            }
+        }
+
+        const actual = calculateComplexity(someStringInfo as any);
+        expect(actual).toBe(10);
+
+
+    })
+
     it('should return uppercase', () => {
         // arrange
         const expected = 'SOME_NAME';

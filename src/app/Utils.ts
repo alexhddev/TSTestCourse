@@ -8,6 +8,12 @@ export type stringInfo = {
     extraInfo: Object | undefined
 }
 
+
+// example for stubs:
+export function calculateComplexity(stringInfo: stringInfo){
+    return Object.keys(stringInfo.extraInfo).length * stringInfo.length;
+}
+
 export function toUpperCase(arg: string){
     return arg.toUpperCase();
 }
