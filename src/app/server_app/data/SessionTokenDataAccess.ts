@@ -19,13 +19,7 @@ export class SessionTokenDataAccess {
     }
 
     public async invalidateToken(tokenId: string){
-        const sessionToken = await this.sessionTokensDataBase.getBy(
-            'id',
-            tokenId
-        )
-        if (sessionToken) {
-            sessionToken.valid = false;
-        }
+        await this.sessionTokensDataBase.update(tokenId, 'valid', false);
     }
 
     public async isValidToken(tokenId: string) {

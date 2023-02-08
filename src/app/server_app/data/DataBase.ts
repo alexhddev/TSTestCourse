@@ -22,7 +22,7 @@ export class DataBase<T extends ObjectWithId> {
         return this.elements.filter(x => x[argName] === argValue)
     }
 
-    public async update(id: string, argName: string, argValue: string) {
+    public async update(id: string, argName: string, argValue: any) {
         const index = this.elements.findIndex(x => x.id === id)
         this.elements[index][argName] = argValue;
     }
