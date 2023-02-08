@@ -1,5 +1,5 @@
 import { UserCredentialsDataAccess } from '../../../app/server_app/data/UserCredentialsDataAccess';
-import { Account } from '../../../app/server_app/Model/AuthModel';
+import { Account } from '../../../app/server_app/model/AuthModel';
 import { DataBase } from '../../../app/server_app/data/DataBase';
 
 const mockInsert = jest.fn();

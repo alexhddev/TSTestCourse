@@ -1,4 +1,4 @@
-import { Account } from "../Model/AuthModel";
+import { Account } from "../model/AuthModel";
 import { DataBase } from "./DataBase";
 
 export class UserCredentialsDataAccess {

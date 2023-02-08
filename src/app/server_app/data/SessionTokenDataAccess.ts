@@ -1,4 +1,4 @@
-import { Account, SessionToken } from "../Model/AuthModel";
+import { Account, SessionToken } from "../model/AuthModel";
 import { DataBase } from "./DataBase";
 import { generateRandomId } from "./IdGenerator";
 

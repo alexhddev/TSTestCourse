@@ -1,7 +1,7 @@
 import { SessionTokenDataAccess } from "../../../app/server_app/data/SessionTokenDataAccess";
 import { DataBase } from '../../../app/server_app/data/DataBase';
 import * as IdGenerator from '../../../app/server_app/data/IdGenerator';
-import { Account } from "../../../app/server_app/Model/AuthModel";
+import { Account } from "../../../app/server_app/model/AuthModel";
 
 
 const mockInsert = jest.fn();
