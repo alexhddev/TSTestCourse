@@ -1,5 +1,7 @@
+import { randomBytes } from 'crypto'
 
 export function generateRandomId() {
-    return Math.random().toString(36).slice(2);
+    const randomId = randomBytes(10).toString('hex');
+    return randomId;
 }
 
