@@ -13,4 +13,9 @@ export class UserCredentialsDataAccess {
       const user = await this.userCredentialsDataBase.getBy('id', id);
       return user;
     }
+
+    public async getUserByUserName(userName: string){
+      const user = await this.userCredentialsDataBase.getBy('userName', userName);
+      return user;
+    }
 }

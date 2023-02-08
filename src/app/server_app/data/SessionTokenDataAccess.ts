@@ -7,14 +7,25 @@ export class SessionTokenDataAccess {
 
     private sessionTokensDataBase = new DataBase<SessionToken>();
 
-    public generateToken(user: Account) {
+    public async generateToken(user: Account) {
         const tokenId = generateRandomId();
-        this.sessionTokensDataBase.insert({
+        await this.sessionTokensDataBase.insert({
             id: tokenId,
             userName: user.userName,
             valid: true,
             expirationDate: this.generateExpirationTime()
         });
+        return tokenId;
+    }
+
+    public async invalidateToken(tokenId: string){
+        const sessionToken = await this.sessionTokensDataBase.getBy(
+            'id',
+            tokenId
+        )
+        if (sessionToken) {
+            sessionToken.valid = false;
+        }
     }
 
     public async isValidToken(tokenId: string) {
