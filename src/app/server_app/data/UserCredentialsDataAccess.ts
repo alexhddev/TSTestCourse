@@ -6,7 +6,8 @@ export class UserCredentialsDataAccess {
     private userCredentialsDataBase = new DataBase<Account>();
 
     public async addUser(user: Account) {
-       return this.userCredentialsDataBase.insert(user);
+      const accountId = await this.userCredentialsDataBase.insert(user);
+       return accountId;
     }
 
     public async getUserById(id: string){
