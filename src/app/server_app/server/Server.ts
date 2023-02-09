@@ -1,5 +1,6 @@
 import { createServer, IncomingMessage, Server as NodeServer, ServerResponse } from 'http'
 import { Authorizer } from '../auth/Authorizer';
+import { LoginHandler } from '../handlers/LoginHandler';
 import { RegisterHandler } from '../handlers/RegisterHandler';
 
 export class Server {
@@ -17,14 +18,17 @@ export class Server {
         console.log('server started')
     }
 
-    private async handleRequest(request: IncomingMessage, response: ServerResponse){
+    private async handleRequest(request: IncomingMessage, response: ServerResponse) {
         try {
             const route = this.getRouteFromUrl(request);
             switch (route) {
                 case 'register':
                     await new RegisterHandler(request, response, this.authorizer).handleRequest();
                     break;
-            
+                case 'login':
+                    await new LoginHandler(request, response, this.authorizer).handleRequest();
+                    break;
+
                 default:
                     break;
             }
@@ -41,7 +45,7 @@ export class Server {
     }
 
     public stopServer() {
-        if(this.server) {
+        if (this.server) {
             this.server.close();
             console.log('server closed')
         }

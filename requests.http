@@ -6,3 +6,12 @@ Content-Type: application/json
     "password": "pass"
 }
 ###
+
+POST http://localhost:8080/login/
+Content-Type: application/json
+
+{
+    "userName": "user1",
+    "password": "pass"
+}
+###
