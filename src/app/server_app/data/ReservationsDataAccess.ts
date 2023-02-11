@@ -10,7 +10,7 @@ export class ReservationsDataAccess {
         return id;
     }
 
-    public async updateReservation(reservationId: string, field: string, value: any) {
+    public async updateReservation(reservationId: string, field: keyof Reservation, value: any) {
         await this.reservationsDataBase.update(
             reservationId,
             field,

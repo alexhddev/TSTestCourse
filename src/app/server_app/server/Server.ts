@@ -1,12 +1,15 @@
 import { createServer, IncomingMessage, Server as NodeServer, ServerResponse } from 'http'
 import { Authorizer } from '../auth/Authorizer';
+import { ReservationsDataAccess } from '../data/ReservationsDataAccess';
 import { LoginHandler } from '../handlers/LoginHandler';
 import { RegisterHandler } from '../handlers/RegisterHandler';
+import { ReservationsHandler } from '../handlers/ReservationsHandler';
 
 export class Server {
 
     private server: NodeServer;
     private authorizer = new Authorizer();
+    private reservationsDataAccess = new ReservationsDataAccess();
 
     public startServer() {
         this.server = createServer(async (req, res) => {
@@ -28,7 +31,9 @@ export class Server {
                 case 'login':
                     await new LoginHandler(request, response, this.authorizer).handleRequest();
                     break;
-
+                case 'reservation':
+                    await new ReservationsHandler(request, response, this.authorizer, this.reservationsDataAccess).handleRequest();
+                    break;
                 default:
                     break;
             }
