@@ -78,7 +78,7 @@ export class ReservationsHandler {
 
     private async handleGet() {
         const id = this.getIdFromUrl();
-        if(id === 'all') {
+        if (id === 'all') {
             const allReservations = await this.reservationsDataAccess.getAllReservations();
             this.response.writeHead(HTTP_CODES.OK, { 'Content-Type': 'application/json' });
             this.response.write(JSON.stringify(allReservations));
@@ -108,18 +108,16 @@ export class ReservationsHandler {
                 const requestBody: Partial<Reservation> = await getRequestBody(this.request);
                 if (this.isValidPartialReservation(requestBody)) {
                     for (const property in requestBody) {
-                        if (property) {
-
-                        }
                         await this.reservationsDataAccess.updateReservation(
                             id,
-                            property as any,
+                            property as keyof Reservation,
                             requestBody[property]
                         )
                     }
                     this.response.writeHead(HTTP_CODES.OK, { 'Content-Type': 'application/json' });
                     this.response.write(JSON.stringify(`Updated ${Object.keys(requestBody)} of reservation ${id}`));
                 } else {
+                    this.response.statusCode = HTTP_CODES.BAD_REQUEST;
                     this.response.write(JSON.stringify(
                         'Please provide valid fields to update!'
                     ));
