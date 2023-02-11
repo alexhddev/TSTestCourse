@@ -66,7 +66,7 @@ export class ReservationsHandler {
         const requestBody: Reservation = await getRequestBody(this.request);
         if (!this.isValidReservation(requestBody)) {
             this.response.statusCode = HTTP_CODES.BAD_REQUEST;
-            this.response.write('Incomplete reservation!');
+            this.response.write(JSON.stringify('Incomplete reservation!'));
             return;
         }
 
@@ -159,6 +159,9 @@ export class ReservationsHandler {
     }
 
     private isValidPartialReservation(reservation: Partial<Reservation>) {
+        if (Object.keys(reservation).length === 0) {
+            return false;
+        }
         const genericReservation: Reservation = {
             endDate: undefined,
             id: undefined,
@@ -180,11 +183,15 @@ export class ReservationsHandler {
     }
 
     private isValidReservation(reservation: Reservation) {
+        if (Object.keys(reservation).length === 0) {
+            return false;
+        }
         const genericReservation: Partial<Reservation> = {
             endDate: undefined,
             room: undefined,
             startDate: undefined,
-            user: undefined
+            user: undefined,
+            id: undefined
         }
         const reservationKeys = Object.keys(genericReservation);
         let hasRightKeys = true;
