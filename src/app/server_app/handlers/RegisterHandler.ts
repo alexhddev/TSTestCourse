@@ -42,8 +42,6 @@ export class RegisterHandler {
         this.response.statusCode = HTTP_CODES.BAD_REQUEST;
         this.response.writeHead(HTTP_CODES.BAD_REQUEST, { 'Content-Type': 'application/json' });
         this.response.write(JSON.stringify('userName and password required'));
-
-
     }
 
 }
