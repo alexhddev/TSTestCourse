@@ -42,7 +42,7 @@ export class LoginHandler {
                 this.response.write(JSON.stringify({token}));
             } else {
                 this.response.statusCode = HTTP_CODES.NOT_fOUND;
-                this.response.write('wrong username or password');
+                this.response.write(JSON.stringify('wrong username or password'));
             }
             return;
         }
