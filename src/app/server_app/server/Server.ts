@@ -18,7 +18,8 @@ export class Server {
             console.log(`Got request for ${req.url}`);
             await this.handleRequest(req, res);
             res.end();
-        }).listen(8080);
+        });
+        this.server.listen(8080);
         console.log('server started')
     }
 
@@ -33,7 +34,8 @@ export class Server {
                     await new LoginHandler(request, response, this.authorizer).handleRequest();
                     break;
                 case 'reservation':
-                    await new ReservationsHandler(request, response, this.authorizer, this.reservationsDataAccess).handleRequest();
+                    const reservation = new ReservationsHandler(request, response, this.authorizer, this.reservationsDataAccess)
+                    await reservation.handleRequest();
                     break;
                 default:
                     break;
@@ -51,7 +53,7 @@ export class Server {
         }
     }
 
-    public stopServer() {
+    public async stopServer() {
         if (this.server) {
             this.server.close();
             console.log('server closed')
