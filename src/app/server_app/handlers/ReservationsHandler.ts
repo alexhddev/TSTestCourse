@@ -25,9 +25,10 @@ export class ReservationsHandler {
     }
 
     public async handleRequest() {
-        if (!this.isOperationAuthorized) {
+        const isAuthorized = await this.isOperationAuthorized();
+        if (!isAuthorized) {
             this.response.statusCode = HTTP_CODES.UNAUTHORIZED;
-            this.response.write('Unauthorized operation!');
+            this.response.write(JSON.stringify('Unauthorized operation!'));
             return;
         }
 

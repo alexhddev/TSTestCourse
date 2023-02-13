@@ -267,21 +267,39 @@ describe('ReservationsHandler test suite', () => {
         });
     });
 
-    xit('should do nothing for not authorized requests', async () => {
-        authorizerMock.isTokenValid.mockClear();
+    it('should return nothing for not authorized requests', async () => {
+        request.headers.authorization = '1234';
+        authorizerMock.isTokenValid.mockReset();
         authorizerMock.isTokenValid.mockResolvedValueOnce(false);
 
-        try {
-            await sut.handleRequest();
-        } catch (error) {
-            console.log(error)
-        }
+        await sut.handleRequest();
+
 
         expect(responseMock.statusCode).toBe(HTTP_CODES.UNAUTHORIZED)
         expect(responseMock.write).toBeCalledWith(JSON.stringify(
             'Unauthorized operation!'
         ));
     })
+
+    it('should return nothing if no authorization header is present', async () => {
+        request.headers.authorization = undefined;
+        
+        await sut.handleRequest();
+
+        expect(responseMock.statusCode).toBe(HTTP_CODES.UNAUTHORIZED)
+        expect(responseMock.write).toBeCalledWith(JSON.stringify(
+            'Unauthorized operation!'
+        ));
+    });
+
+    it('should do nothing for not supported http methods', async () => {
+        request.method = 'SOME-METHOD'
+        
+        await sut.handleRequest();
+
+        expect(responseMock.write).not.toBeCalled();
+        expect(responseMock.writeHead).not.toBeCalled();
+    });
 
 
 
