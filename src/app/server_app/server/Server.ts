@@ -4,6 +4,7 @@ import { ReservationsDataAccess } from '../data/ReservationsDataAccess';
 import { LoginHandler } from '../handlers/LoginHandler';
 import { RegisterHandler } from '../handlers/RegisterHandler';
 import { ReservationsHandler } from '../handlers/ReservationsHandler';
+import { HTTP_CODES } from '../model/ServerModel';
 
 export class Server {
 
@@ -16,7 +17,11 @@ export class Server {
             console.log(`Got request from ${req.headers['user-agent']}`);
             console.log(`Got request for ${req.url}`);
             await this.handleRequest(req, res);
+            console.log(1);
+            console.log((res.end as any as jest.Mock).mock.calls)
             res.end();
+            console.log((res.end as any as jest.Mock).mock.calls)
+            console.log(2);
         }).listen(8080);
         console.log('server started')
     }
@@ -38,7 +43,7 @@ export class Server {
                     break;
             }
         } catch (error) {
-            console.error(error.message);
+            response.writeHead(HTTP_CODES.INTERNAL_SERVER_ERROR, JSON.stringify(`Internal server error: ${error.message}`))
         }
     }
 
