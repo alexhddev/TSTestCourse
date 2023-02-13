@@ -7,7 +7,7 @@ jest.mock('../../../app/server_app/data/ReservationsDataAccess');
 
 const requestMock = {
     url: '',
-    headers : {
+    headers: {
         'user-agent': 'jest test'
     }
 }
@@ -26,27 +26,22 @@ jest.mock('http', () => ({
     }
 }))
 
-describe('Server test suite', ()=>{
+describe('Server test suite', () => {
 
     let sut: Server;
 
-    beforeEach(()=>{
+    beforeEach(() => {
         sut = new Server();
         expect(Authorizer).toBeCalledTimes(1);
         expect(ReservationsDataAccess).toBeCalledTimes(1);
     });
 
-    afterEach(()=>{
+    afterEach(() => {
         jest.clearAllMocks();
     })
 
-    it('should start server on port 8080', ()=>{
-
-        try {
-            sut.startServer();
-        } catch (error) {
-            console.error(error);
-        }
+    it('should start server on port 8080', async () => {
+        await sut.startServer();
 
         expect(listenMock.listen).toBeCalledWith(8080);
         expect(responseMock.end).toBeCalled();
