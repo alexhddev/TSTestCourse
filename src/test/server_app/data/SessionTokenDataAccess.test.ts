@@ -35,7 +35,7 @@ describe('SessionTokenDataAccess test suite', () => {
         sut = new SessionTokenDataAccess();
         expect(DataBase).toHaveBeenCalledTimes(1);
         jest.spyOn(global.Date, 'now').mockReturnValue(0);
-        jest.spyOn(IdGenerator, 'generateRandomId').mockReturnValue(fakeId);
+        jest.spyOn(IdGenerator, 'generateRandomId').mockReturnValueOnce(fakeId);
     });
 
     afterEach(() => {
