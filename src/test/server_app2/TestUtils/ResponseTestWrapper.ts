@@ -1,3 +1,4 @@
+import { generateRandomId } from "../../../app/server_app/data/IdGenerator";
 import { HTTP_CODES } from "../../../app/server_app/model/ServerModel";
 
 
@@ -7,6 +8,12 @@ export class ResponseTestWrapper {
     public statusCode: HTTP_CODES;
     public headers = new Array<object>();
     public body: object;
+    public id : string;
+
+    constructor(){
+        this.id = generateRandomId();
+        console.log('Creating ResponseTestWrapper')
+    }
 
     public writeHead(statusCode: HTTP_CODES, header: object) {
         this.statusCode = statusCode,
@@ -21,7 +28,7 @@ export class ResponseTestWrapper {
 
     public clearFields(){
         this.statusCode = undefined;
-        this.headers = undefined;
+        this.headers.length = 0;
         this.body = undefined;
     }
 

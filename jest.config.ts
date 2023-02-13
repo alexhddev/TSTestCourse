@@ -11,7 +11,7 @@ const config: Config.InitialOptions = {
     `${baseTestDir}/**/*test.ts`
   ],
   collectCoverage: true,
-  collectCoverageFrom: [`${baseDir}/**/*.ts`],
+  collectCoverageFrom: [`${baseDir}/**/*.ts`]
 }
 
 export default config;

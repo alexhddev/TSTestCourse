@@ -1,5 +1,5 @@
 import { Account } from "../../app/server_app/model/AuthModel";
-import { HTTP_METHODS } from "../../app/server_app/model/ServerModel";
+import { HTTP_CODES, HTTP_METHODS } from "../../app/server_app/model/ServerModel";
 import { Server } from "../../app/server_app/server/Server";
 import { RequestTestWrapper } from "./TestUtils/RequestTestWrapper";
 import { ResponseTestWrapper } from "./TestUtils/ResponseTestWrapper";
@@ -60,8 +60,14 @@ describe('Register requests', () => {
     test('should work now', async () => {
         requestWrapper.method = HTTP_METHODS.POST;
         requestWrapper.body = someAccount;
+        requestWrapper.url = 'localhost:8080/register';
 
         await new Server().startServer();
+
+        await new Promise(process.nextTick); // this solves timing issues, 
+        // https://stackoverflow.com/questions/44741102/how-to-make-jest-wait-for-all-asynchronous-code-to-finish-execution-before-expec
+
+        expect(responseWrapper.statusCode).toBe(HTTP_CODES.CREATED);
     });
 
 });

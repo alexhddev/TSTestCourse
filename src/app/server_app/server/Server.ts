@@ -14,13 +14,13 @@ export class Server {
 
     public async startServer() {
         this.server = createServer(async (req, res) => {
-            console.log(`Got request from ${req.headers['user-agent']}`);
-            console.log(`Got request for ${req.url}`);
+            // console.log(`Got request from ${req.headers['user-agent']}`);
+            // console.log(`Got request for ${req.url}`);
             await this.handleRequest(req, res);
             res.end();
         });
         this.server.listen(8080);
-        console.log('server started')
+        // console.log('server started')
     }
 
     private async handleRequest(request: IncomingMessage, response: ServerResponse) {
@@ -29,6 +29,7 @@ export class Server {
             switch (route) {
                 case 'register':
                     await new RegisterHandler(request, response, this.authorizer).handleRequest();
+                    console.log(response)
                     break;
                 case 'login':
                     await new LoginHandler(request, response, this.authorizer).handleRequest();
@@ -44,6 +45,7 @@ export class Server {
             response.writeHead(HTTP_CODES.INTERNAL_SERVER_ERROR, JSON.stringify(`Internal server error: ${error.message}`))
             console.log(error);
         }
+        console.log('ended handling request')
     }
 
     private getRouteFromUrl(request: IncomingMessage) {
