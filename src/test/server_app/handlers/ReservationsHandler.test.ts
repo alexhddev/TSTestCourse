@@ -30,7 +30,7 @@ describe('ReservationsHandler test suite', () => {
     };
     const authorizerMock = {
         registerUser: jest.fn(),
-        isTokenValid: jest.fn()
+        validateToken: jest.fn()
     }
 
     const reservationsDataAccessMock = {
@@ -58,7 +58,7 @@ describe('ReservationsHandler test suite', () => {
             reservationsDataAccessMock as any as ReservationsDataAccess
         );
         request.headers.authorization = 'abcd';
-        authorizerMock.isTokenValid.mockResolvedValueOnce(true);
+        authorizerMock.validateToken.mockResolvedValueOnce(true);
     })
 
     afterEach(() => {
@@ -269,8 +269,8 @@ describe('ReservationsHandler test suite', () => {
 
     it('should return nothing for not authorized requests', async () => {
         request.headers.authorization = '1234';
-        authorizerMock.isTokenValid.mockReset();
-        authorizerMock.isTokenValid.mockResolvedValueOnce(false);
+        authorizerMock.validateToken.mockReset();
+        authorizerMock.validateToken.mockResolvedValueOnce(false);
 
         await sut.handleRequest();
 

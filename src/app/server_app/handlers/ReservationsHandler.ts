@@ -57,7 +57,7 @@ export class ReservationsHandler {
     private async isOperationAuthorized() {
         const tokenId = this.request.headers.authorization;
         if (tokenId) {
-            const isValid = await this.authorizer.isTokenValid(tokenId);
+            const isValid = await this.authorizer.validateToken(tokenId);
             return isValid;
         }
         return false;

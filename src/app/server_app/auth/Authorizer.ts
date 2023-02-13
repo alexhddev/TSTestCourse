@@ -31,11 +31,6 @@ export class Authorizer implements IUsersHandler, ITokenValidator {
         }
     }
 
-    public async isTokenValid(tokenId: string){
-        const isValid = await this.sessionTokenDataAccess.isValidToken(tokenId);
-        return isValid;
-    }
-
     public async logout(tokenId: string){
         await this.sessionTokenDataAccess.invalidateToken(tokenId);
     }
