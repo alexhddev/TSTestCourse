@@ -29,7 +29,6 @@ export class Server {
             switch (route) {
                 case 'register':
                     await new RegisterHandler(request, response, this.authorizer).handleRequest();
-                    console.log(response)
                     break;
                 case 'login':
                     await new LoginHandler(request, response, this.authorizer).handleRequest();
@@ -45,7 +44,6 @@ export class Server {
             response.writeHead(HTTP_CODES.INTERNAL_SERVER_ERROR, JSON.stringify(`Internal server error: ${error.message}`))
             console.log(error);
         }
-        console.log('ended handling request')
     }
 
     private getRouteFromUrl(request: IncomingMessage) {
