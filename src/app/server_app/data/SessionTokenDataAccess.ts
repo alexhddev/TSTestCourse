@@ -8,13 +8,13 @@ export class SessionTokenDataAccess {
     private sessionTokensDataBase = new DataBase<SessionToken>();
 
     public async generateToken(user: Account) {
-        const tokenId = generateRandomId();
-        await this.sessionTokensDataBase.insert({
-            id: tokenId,
+        const tokenId =  await this.sessionTokensDataBase.insert({
+            id: '',
             userName: user.userName,
             valid: true,
             expirationDate: this.generateExpirationTime()
         });
+        console.log(`Inserting ${tokenId} into the database`);
         return tokenId;
     }
 
@@ -23,6 +23,7 @@ export class SessionTokenDataAccess {
     }
 
     public async isValidToken(tokenId: string) {
+        console.log(`Quering for ${tokenId} into the database`);
         const sessionToken = await this.sessionTokensDataBase.getBy(
             'id',
             tokenId

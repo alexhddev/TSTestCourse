@@ -43,11 +43,12 @@ describe('SessionTokenDataAccess test suite', () => {
     });
 
     it('should generate token for account', async () => {
+        mockInsert.mockResolvedValueOnce(fakeId);
         const actualTokenId = await sut.generateToken(someAccount);
 
         expect(actualTokenId).toBe(fakeId);
         expect(mockInsert).toBeCalledWith({
-            id: fakeId,
+            id: '',
             userName: someAccount.userName,
             valid: true,
             expirationDate: new Date(1000 * 60 * 60)
