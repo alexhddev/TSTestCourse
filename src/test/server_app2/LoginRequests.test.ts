@@ -5,6 +5,8 @@ import { Server } from "../../app/server_app/server/Server";
 import { RequestTestWrapper } from "./TestUtils/RequestTestWrapper";
 import { ResponseTestWrapper } from "./TestUtils/ResponseTestWrapper";
 
+jest.mock('../../app/server_app/data/DataBase');
+
 const requestWrapper = new RequestTestWrapper();
 const responseWrapper = new ResponseTestWrapper();
 

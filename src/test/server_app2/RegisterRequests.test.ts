@@ -5,6 +5,8 @@ import { Server } from "../../app/server_app/server/Server";
 import { RequestTestWrapper } from "./TestUtils/RequestTestWrapper";
 import { ResponseTestWrapper } from "./TestUtils/ResponseTestWrapper";
 
+jest.mock('../../app/server_app/data/DataBase');
+
 const requestWrapper = new RequestTestWrapper();
 const responseWrapper = new ResponseTestWrapper();
 
@@ -45,6 +47,7 @@ describe('Register requests', () => {
         requestWrapper.method = HTTP_METHODS.POST;
         requestWrapper.body = someAccount;
         requestWrapper.url = 'localhost:8080/register';
+        insertSpy.mockResolvedValueOnce('1234');
 
         await new Server().startServer();
 
