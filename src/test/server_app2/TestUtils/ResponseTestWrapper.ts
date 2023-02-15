@@ -8,12 +8,6 @@ export class ResponseTestWrapper {
     public statusCode: HTTP_CODES;
     public headers = new Array<object>();
     public body: object;
-    public id : string;
-
-    constructor(){
-        this.id = generateRandomId();
-        console.log('Creating ResponseTestWrapper')
-    }
 
     public writeHead(statusCode: HTTP_CODES, header: object) {
         this.statusCode = statusCode,
