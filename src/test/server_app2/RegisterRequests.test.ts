@@ -49,6 +49,32 @@ describe('Register requests test suite', ()=>{
         }))
     })
 
+    it('should reject requests with no userName and password', async ()=>{
+        requestWrapper.method = HTTP_METHODS.POST;
+        requestWrapper.body = {};
+        requestWrapper.url = 'localhost:8080/register';
+
+        await new Server().startServer();
+
+        await new Promise(process.nextTick) // this solves timing issues
+
+        expect(responseWrapper.statusCode).toBe(HTTP_CODES.BAD_REQUEST);
+        expect(responseWrapper.body).toBe('userName and password required')
+    })
+
+    it('should do nothing for not supported methods', async ()=>{
+        requestWrapper.method = HTTP_METHODS.DELETE;
+        requestWrapper.body = {};
+        requestWrapper.url = 'localhost:8080/register';
+
+        await new Server().startServer();
+
+        await new Promise(process.nextTick) // this solves timing issues
+
+        expect(responseWrapper.statusCode).toBeUndefined();
+        expect(responseWrapper.body).toBeUndefined();
+    })
+
 
 
 })
