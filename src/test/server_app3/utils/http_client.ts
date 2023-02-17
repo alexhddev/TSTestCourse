@@ -1,10 +1,14 @@
-import { request, RequestOptions } from 'http';
+import { IncomingHttpHeaders, request, RequestOptions } from 'http';
 
+type awesomeRequestResponse = {
+    statusCode: number,
+    headers: IncomingHttpHeaders,
+    body: any
+}
 
-
-export async function makeAwesomeRequest(options: RequestOptions , body?: object) {
+export async function makeAwesomeRequest(options: RequestOptions, body?: object): Promise<awesomeRequestResponse> {
     return new Promise((resolve, reject) => {
-        const clientRequest = request(options, (incomingMessage) =>{
+        const clientRequest = request(options, (incomingMessage) => {
             let response = {
                 statusCode: incomingMessage.statusCode,
                 headers: incomingMessage.headers,
@@ -13,7 +17,7 @@ export async function makeAwesomeRequest(options: RequestOptions , body?: object
             incomingMessage.on('data', (chunk) => {
                 response.body.push(chunk);
             });
-            incomingMessage.on('end', ()=>{
+            incomingMessage.on('end', () => {
                 if (response.body.length) {
 
                     response.body = response.body.join('') as any;
@@ -24,14 +28,13 @@ export async function makeAwesomeRequest(options: RequestOptions , body?: object
                         console.log(error)
                     }
                 }
-
                 resolve(response);
             })
             incomingMessage.on('error', (err) => {
                 reject(err);
             });
         });
-        clientRequest.on('error', (error) =>{
+        clientRequest.on('error', (error) => {
             reject(error);
         });
         clientRequest.setHeader('user-agent', 'AwesomeRequest')
