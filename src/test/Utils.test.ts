@@ -28,7 +28,7 @@ describe('Utils test suite', () => {
         expect(actual).toBe(expected);
     });
 
-    describe.only('StringUtils tests', ()=>{
+    describe('StringUtils tests', ()=>{
         let sut: StringUtils;
         beforeEach(()=>{
            sut = new StringUtils(); 
@@ -48,7 +48,7 @@ describe('Utils test suite', () => {
             }).toThrowError('Invalid argument!')
         })
 
-        it.only('Should throw error on invalid argument - try catch block', (done)=>{
+        it('Should throw error on invalid argument - try catch block', (done)=>{
             try {
                 sut.getStringInfo('');
                 done('GetString info for invalid argument should throw error!  ')
