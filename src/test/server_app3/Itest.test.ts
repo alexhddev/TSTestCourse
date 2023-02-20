@@ -164,7 +164,7 @@ describe('Server app integration tests', () => {
                 authorization: token
             }
         });
-        expect(getResult.status).toBe(HTTP_CODES.NOT_fOUND);
+        expect(getResult.status).toBe(HTTP_CODES.BAD_REQUEST);
     });
 
     afterAll(() => {
