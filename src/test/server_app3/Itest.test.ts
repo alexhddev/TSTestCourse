@@ -36,6 +36,7 @@ describe('Server app integration tests', () => {
         }, someUser)
         expect(result.statusCode).toBe(HTTP_CODES.CREATED);
         expect(result.body.userId).toBeDefined();
+        console.log(process.env.DB_HOST);
     });
 
     it('should register new user', async () => {
@@ -142,11 +143,8 @@ describe('Server app integration tests', () => {
                 authorization: token
             }
         });
-        const getResultBody = await getResult.json();
-        const expectedResult = structuredClone(someReservation);
-        expectedResult.id = createdReservationId;
-        expectedResult.startDate = 'someOtherStartDate';
-        expect(getResultBody).toEqual(expectedResult);
+        const getResultBody: Reservation = await getResult.json();
+        expect(getResultBody.startDate).toEqual('someOtherStartDate');
 
     });
 

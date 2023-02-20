@@ -11,7 +11,10 @@ const config: Config.InitialOptions = {
     `${baseTestDir}/**/*test.ts`
   ],
   collectCoverage: true,
-  collectCoverageFrom: [`${baseDir}/**/*.ts`]
+  collectCoverageFrom: [`${baseDir}/**/*.ts`],
+  setupFilesAfterEnv:[
+    `<rootDir>/src/test/server_app3/utils/db_connect.ts`
+  ]
 }
 
 export default config;
