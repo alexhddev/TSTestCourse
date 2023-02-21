@@ -179,7 +179,7 @@ describe('Server app integration tests', ()=>{
     });
 
     it('snapshot demo', async ()=>{
-        jest.spyOn(generated, 'generateRandomId').mockReturnValueOnce('123456');    
+        jest.spyOn(generated, 'generateRandomId').mockReturnValueOnce('12345');    
         await fetch('http://localhost:8080/reservation', {
             method:HTTP_METHODS.POST,
             body: JSON.stringify(someReservation),
