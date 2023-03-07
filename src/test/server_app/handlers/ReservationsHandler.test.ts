@@ -238,7 +238,7 @@ describe('ReservationsHandler test suite', () => {
         });
     });
 
-    describe('PUT requests', () => {
+    describe('DELETE requests', () => {
         beforeEach(() => {
             request.method = HTTP_METHODS.DELETE;
         });
@@ -300,9 +300,4 @@ describe('ReservationsHandler test suite', () => {
         expect(responseMock.write).not.toBeCalled();
         expect(responseMock.writeHead).not.toBeCalled();
     });
-
-
-
-
-
 });
