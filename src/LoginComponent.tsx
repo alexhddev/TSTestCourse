@@ -13,10 +13,8 @@ function LoginComponent({ loginService, setToken }: LoginProps) {
 
   const handleSubmit = async (event: SyntheticEvent) =>{
     event.preventDefault();
-    console.log(userName + ' ' + password);
     if (userName && password) {
         const loginResponse = await loginService.login(userName, password);
-        console.log(loginResponse);
         if (loginResponse) {
           setLoginResult('successful login')
           setToken(loginResponse)
