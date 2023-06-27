@@ -16,8 +16,8 @@ describe('Server app integration tests', ()=>{
         server.startServer();
     });
 
-    afterAll(()=>{
-        server.stopServer()
+    afterAll(async ()=>{
+        await server.stopServer()
     })
 
     const someUser: Account = {

@@ -55,8 +55,17 @@ export class Server {
 
     public async stopServer() {
         if (this.server) {
-            this.server.close();
-            console.log('server closed')
+            console.log('closing server');
+            return new Promise<void>((resolve, reject) => {
+                this.server.close((err) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        console.log('server closed');
+                        resolve();
+                    }
+                });
+            });
         }
     }
 }
