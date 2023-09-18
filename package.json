@@ -29,6 +29,7 @@
     "typescript": "^4.9.5"
   },
   "dependencies": {
+    "mongodb": "^6.1.0",
     "uuid": "^9.0.0"
   }
 }
