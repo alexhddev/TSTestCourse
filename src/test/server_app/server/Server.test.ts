@@ -122,9 +122,27 @@ describe('Server test suite', ()=>{
     });
 
     it('should stop the server if started',async ()=>{
+        serverMock.close.mockImplementationOnce((cb: Function)=>{
+            cb();
+        })
+
         await sut.startServer();
 
         await sut.stopServer();
+
+        expect(serverMock.close).toBeCalledTimes(1);
+    })
+
+    it('should forward error while stopping server',async ()=>{
+        serverMock.close.mockImplementationOnce((cb: Function)=>{
+            cb(new Error('Error while closing server!'));
+        })
+
+        await sut.startServer();
+
+        expect(async ()=>{
+            await sut.stopServer();
+        }).rejects.toThrowError('Error while closing server!')
 
         expect(serverMock.close).toBeCalledTimes(1);
     })
