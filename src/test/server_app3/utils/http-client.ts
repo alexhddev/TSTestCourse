@@ -1,18 +1,19 @@
 import { IncomingHttpHeaders, request, RequestOptions } from 'http';
 
-type awesomeRequestResponse = {
-    statusCode: number,
+type AwesomeRequestResponse = {
+    statusCode: number | undefined,
     headers: IncomingHttpHeaders,
     body: any
 }
 
-export async function makeAwesomeRequest(options: RequestOptions, body?: object): Promise<awesomeRequestResponse> {
+export async function makeAwesomeRequest(options: RequestOptions, body?: object): Promise<AwesomeRequestResponse> {
     return new Promise((resolve, reject) => {
+        const requestBody: any[] = [];
         const clientRequest = request(options, (incomingMessage) => {
             let response = {
                 statusCode: incomingMessage.statusCode,
                 headers: incomingMessage.headers,
-                body: []
+                body: requestBody
             };
             incomingMessage.on('data', (chunk) => {
                 response.body.push(chunk);

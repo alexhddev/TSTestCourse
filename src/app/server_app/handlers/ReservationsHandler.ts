@@ -106,12 +106,13 @@ export class ReservationsHandler {
         if (id) {
             const reservation = await this.reservationsDataAccess.getReservation(id);
             if (reservation) {
-                const requestBody: Partial<Reservation> = await getRequestBody(this.request);
+                const requestBody: Reservation = await getRequestBody(this.request);
                 if (this.isValidPartialReservation(requestBody)) {
-                    for (const property in requestBody) {
+                    const requestBodyProperties = Object.keys(requestBody) as Array<keyof Reservation>;
+                    for (const property of requestBodyProperties) {
                         await this.reservationsDataAccess.updateReservation(
                             id,
-                            property as keyof Reservation,
+                            property,
                             requestBody[property]
                         )
                     }
@@ -161,7 +162,7 @@ export class ReservationsHandler {
         if (Object.keys(reservation).length === 0) {
             return false;
         }
-        const genericReservation: Reservation = {
+        const genericReservation: Partial<Reservation> = {
             endDate: undefined,
             id: undefined,
             room: undefined,

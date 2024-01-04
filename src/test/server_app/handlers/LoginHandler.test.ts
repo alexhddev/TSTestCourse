@@ -16,7 +16,7 @@ describe('LoginHandler test suite', () => {
     let sut: LoginHandler;
 
     const request = {
-        method: undefined
+        method: ''
     };
     const responseMock = {
         writeHead: jest.fn(),

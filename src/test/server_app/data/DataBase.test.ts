@@ -62,8 +62,8 @@ describe('DataBase test suite', ()=>{
         const expectedColor = 'red';
 
         await sut.update(id, 'color', expectedColor);
-        const object= await sut.getBy('id', id);
-        const actualColor = object.color;
+        const object = await sut.getBy('id', id);
+        const actualColor = object!.color;
 
         expect(actualColor).toBe(expectedColor);
     });

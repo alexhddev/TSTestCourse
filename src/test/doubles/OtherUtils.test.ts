@@ -57,7 +57,7 @@ describe('OtherUtils test suite', ()=>{
 
     describe('Tracking callbacks', ()=>{
 
-        let cbArgs = [];
+        let cbArgs: string[] = [];
         let timesCalled = 0;
 
         function callBackMock(arg:string) {

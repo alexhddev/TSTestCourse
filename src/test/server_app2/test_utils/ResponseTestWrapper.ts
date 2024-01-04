@@ -3,9 +3,9 @@ import { HTTP_CODES } from "../../../app/server_app/model/ServerModel";
 
 export class ResponseTestWrapper {
 
-    public statusCode: HTTP_CODES;
+    public statusCode: HTTP_CODES | undefined;
     public headers = new Array<object>();
-    public body: object;
+    public body: object | undefined;
 
     public writeHead(statusCode: HTTP_CODES, header: object) {
         this.statusCode = statusCode;

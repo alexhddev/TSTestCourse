@@ -15,7 +15,7 @@ describe('RegisterHandler test suite', ()=>{
     let sut: RegisterHandler;
 
     const request = {
-        method: undefined
+        method: ''
     }
 
     const responseMock = {

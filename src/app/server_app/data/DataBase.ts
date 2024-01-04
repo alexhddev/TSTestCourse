@@ -14,15 +14,15 @@ export class DataBase<T extends ObjectWithId> {
         return arg.id;
     }
 
-    public async getBy(argName: string, argValue: string) {
+    public async getBy(argName: keyof T, argValue: string) {
         return this.elements.find(x => x[argName] === argValue)
     }
 
-    public async findAllBy(argName: string, argValue: string) {
+    public async findAllBy(argName: keyof T, argValue: string) {
         return this.elements.filter(x => x[argName] === argValue)
     }
 
-    public async update(id: string, argName: string, argValue: any) {
+    public async update(id: string, argName: keyof T, argValue: any) {
         const index = this.elements.findIndex(x => x.id === id)
         this.elements[index][argName] = argValue;
     }

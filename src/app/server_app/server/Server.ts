@@ -8,7 +8,7 @@ import { HTTP_CODES } from '../model/ServerModel';
 
 export class Server {
 
-    private server: NodeServer;
+    private server: NodeServer | undefined;
     private authorizer = new Authorizer();
     private reservationsDataAccess = new ReservationsDataAccess();
 
@@ -57,7 +57,7 @@ export class Server {
         if (this.server) {
             console.log('closing server');
             return new Promise<void>((resolve, reject) => {
-                this.server.close((err) => {
+                this.server!.close((err) => {
                     if (err) {
                         reject(err);
                     } else {

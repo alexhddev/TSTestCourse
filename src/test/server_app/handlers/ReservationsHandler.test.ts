@@ -17,11 +17,11 @@ describe('ReservationsHandler test suite', () => {
     let sut: ReservationsHandler;
 
     const request = {
-        method: undefined,
+        method: '',
         headers: {
-            authorization: undefined
+            authorization: ''
         },
-        url: undefined
+        url: ''
     };
     const responseMock = {
         writeHead: jest.fn(),
@@ -42,7 +42,7 @@ describe('ReservationsHandler test suite', () => {
     }
 
     const someReservation: Reservation = {
-        id: undefined,
+        id: '',
         endDate: new Date().toDateString(),
         startDate: new Date().toDateString(),
         room: 'someRoom',
@@ -63,7 +63,7 @@ describe('ReservationsHandler test suite', () => {
 
     afterEach(() => {
         jest.clearAllMocks();
-        request.url = undefined;
+        request.url = '';
         responseMock.statusCode = 0;
     })
 
@@ -282,7 +282,7 @@ describe('ReservationsHandler test suite', () => {
     })
 
     it('should return nothing if no authorization header is present', async () => {
-        request.headers.authorization = undefined;
+        request.headers.authorization = '';
         
         await sut.handleRequest();
 

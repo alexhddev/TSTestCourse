@@ -3,12 +3,12 @@ import { HTTP_METHODS } from "../../../app/server_app/model/ServerModel"
 
 export class RequestTestWrapper {
 
-    public body: object;
-    public method: HTTP_METHODS;
-    public url: string;
-    public headers = {}
+    public body: object | undefined;
+    public method: HTTP_METHODS| undefined;
+    public url: string| undefined;
+    public headers:Record<string, string> = {}
 
-    public on(event, cb) {
+    public on(event: any, cb: Function) {
         if(event == 'data') {
             cb(JSON.stringify(this.body));
         } else {
