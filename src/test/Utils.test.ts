@@ -3,7 +3,7 @@ import { getStringInfo, StringUtils, toUpperCase } from "../app/Utils";
 
 describe('Utils test suite', () => {
 
-    describe.only('StringUtils tests', ()=>{
+    describe('StringUtils tests', ()=>{
 
         let sut: StringUtils;
 
@@ -20,14 +20,13 @@ describe('Utils test suite', () => {
             function expectError() {
                 const actual = sut.toUpperCase('');
             }            
-            expect(expectError).toThrow();
-            expect(expectError).toThrowError('Invalid argument!');
+            expect(expectError).toThrow('Invalid argument!');
         })
 
         it('Should throw error on invalid argument - arrow function', ()=>{      
             expect(()=>{
                 sut.toUpperCase('');
-            }).toThrowError('Invalid argument!');
+            }).toThrow('Invalid argument!');
         })
 
         it('Should throw error on invalid argument - try catch block', (done)=>{             
